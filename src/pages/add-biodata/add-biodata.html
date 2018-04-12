@@ -6,14 +6,7 @@
 
 <ion-content padding>
   <div>
-    <ion-item *ngIf="isEdited && !hideForm">
-      <button ion-button item-right color="danger" text-center block (click)="deleteEntry()">
-        Hapus biodata ini?
-        <ion-icon name="remove-circle"></ion-icon>
-      </button>
-    </ion-item>
-
-    <div *ngIf="!hideForm">
+    <div *ngIf="hideForm">
       <ion-item class="post-entry-message" text-wrap>
         <h3>Berhasil! -</h3>
         <p>Jika ingin edit atau hapus biodata, kembali ke halaman utama.</p>
@@ -75,6 +68,13 @@
           <ion-item>
             <button ion-button color="primary" text-center block [disabled]="!form.valid">
               Simpan Biodata -
+            </button>
+          </ion-item>
+
+          <ion-item *ngIf="isEdited && !hideForm">
+            <button ion-button item-right color="danger" text-center block (click)="deleteEntry()">
+              Hapus biodata ini?  
+              <ion-icon name="remove-circle"></ion-icon>
             </button>
           </ion-item>
 

@@ -35,7 +35,7 @@ export class AddBiodataPage {
       "namaBelakang": ["", Validators.required],
       "jenisKelamin": ["", Validators.required],
       "alamat": ["", Validators.required],
-      "noTelp": ["", Validators.required, Validators.maxLength(12)],
+      "noTelp": ["", Validators.required],
       "email": ["", Validators.required]
     });
   }
@@ -87,6 +87,29 @@ export class AddBiodataPage {
           this.sendNotification(`Gagal tambah data!`);
         }
       }));
+  }
+
+  // menyimpan entry biodata
+  saveEntry(){
+    let namaDepan: string = this.form.controls["namaDepan"].value,
+      namaBelakang: string = this.form.controls["namaBelakang"].value,
+      jenisKelamin: string = this.form.controls["jenisKelamin"].value,
+      alamat: string = this.form.controls["alamat"].value,
+      noTelp: string = this.form.controls["noTelp"].value,
+      email: string = this.form.controls["email"].value;
+
+      // deteksi apakah yg diklik edit atau simpan
+      if(this.isEdited){
+        // buka form edit biodata
+        this.updateEntry(namaDepan, namaBelakang, jenisKelamin, alamat, noTelp, email);
+      } else {
+        // buka form create entry biodata baru
+        this.createEntry(namaDepan, namaBelakang, jenisKelamin, alamat, noTelp, email);
+      }
+  }
+
+  updateEntry(namaDepan, namaBelakang, jenisKelamin, alamat, noTelp, email){
+    
   }
 
   // mengirim notifikasi ke user
