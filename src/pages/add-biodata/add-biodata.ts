@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, Header } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';   // convert menjadi json
@@ -115,6 +115,7 @@ export class AddBiodataPage {
     }
   }
 
+  // mengubah entry biodata
   updateEntry(namaDepan, namaBelakang, jenisKelamin, alamat, noTelp, email) {
     let body: string = "key=update&namaDepan=" + namaDepan + "&namaBelakang=" + namaBelakang + "&jenisKelamin=" + jenisKelamin + "&alamat=" + alamat + "&noTelp=" + noTelp + "&email=" + email + "&recordID=" + this.recordID,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
@@ -137,6 +138,30 @@ export class AddBiodataPage {
         }
       });
 
+  }
+
+  // menghapus biodata
+  deleteEntry(){
+    let namaDepan: string = this.form.controls["namaDepan"].value,
+      body: string = "key=delete&recordID=" + this.recordID,
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.baseURI + "manage.php";
+
+      this.http.post(url, body, options)
+        .subscribe(data => {
+          if (data.status === 200) {    // http code
+            this.hideForm = true;
+            this.sendNotification(`Berhasil hapus data: ${namaDepan}`);
+            this.autoRefresh();
+            this.navCtrl.push(HomePage);
+          }
+          // jika request gagal
+          else {
+            this.sendNotification(`Gagal edit data!`);
+          }
+        });
   }
 
   // mengirim notifikasi ke user

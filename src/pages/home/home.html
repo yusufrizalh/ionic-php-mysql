@@ -9,16 +9,16 @@
 <ion-content padding>
   <ion-item>
     <button class="add" ion-button item-right icon-right margin-bottom color="primary" (click)="addEntry()">
-      Tambah Biodata
+      Tambah Biodata &nbsp;
       <ion-icon name="add"></ion-icon>
     </button>
   </ion-item>
 
   <!--lihat seluruh daftar biodata dari table biodata di database-->
   <ion-item *ngFor="let item of items">
-    <h3>{{ item.namaDepan }}</h3>
+    <h3>{{ item.namaDepan }} {{ item.namaBelakang }}</h3>
     <button ion-button color="secondary" item-right (click)="viewEntry({ record: item })">
-      Lihat  
+      Lihat  &nbsp;
       <ion-icon name="arrow-dropright-circle"></ion-icon>
     </button>
   </ion-item>
