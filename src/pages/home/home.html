@@ -1,14 +1,25 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Daftar Biodata Pegawai
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <ion-item>
+    <button class="add" ion-button item-right icon-right margin-bottom color="primary" (click)="addEntry()">
+      Tambah Biodata
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-item>
+
+  <!--lihat seluruh daftar biodata dari table biodata di database-->
+  <ion-item *ngFor="let item of items">
+    <h3>{{ item.namaDepan }}</h3>
+    <button ion-button color="secondary" item-right (click)="viewEntry({ record: item })">
+      Lihat  
+      <ion-icon name="arrow-dropright-circle"></ion-icon>
+    </button>
+  </ion-item>
 </ion-content>
